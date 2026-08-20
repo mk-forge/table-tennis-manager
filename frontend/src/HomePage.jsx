@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function HomePage() {
   useEffect(() => {
-      document.title = "Ping Pong Manager";
+      document.title = "Table Tennis Manager";
   }, []);
 
   return (
