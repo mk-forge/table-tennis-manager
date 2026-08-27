@@ -14,9 +14,9 @@ This project was developed as a school assignment. Lets you manage players, trac
 
 ## Tech stack
 
-- Frontend: React
-- Backend: Node.js, Express, Prisma
-- Database: SQLite
+- **Frontend:** React
+- **Backend:** Node.js, Express, Prisma
+- **Database:** SQLite
 
 ## Installation
 
