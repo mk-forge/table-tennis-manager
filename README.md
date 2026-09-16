@@ -4,11 +4,11 @@ Full-stack application for managing table tennis players and matches.
 
 ## Overview
 
-This project was developed as a school assignment. Lets you manage players, track their matches, and store results in a SQLite database. React frontend, Express backend, Prisma as the ORM layer.
+This project was developed as a school assignment. Lets you manage players, track their matches and store results in a SQLite database. React frontend, Express backend, Prisma as the ORM layer.
 
 ## Features
 
-- Create, read, update, and delete players
+- Create, read, update and delete players
 - Add matches to a player (date and time, score, opponent)
 - View player details and match history
 
