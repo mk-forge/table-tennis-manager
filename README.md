@@ -38,7 +38,7 @@ npm start
 
 ## Screenshots
 
-![Player creation](./Screenshots/player-creation.png)
-![Player list](./Screenshots/player-list.png)
-![Player detail](./Screenshots/player-detail.png)
-![Player matches](./Screenshots/player-matches.png)
+![Player creation](https://raw.githubusercontent.com/mk-forge/table-tennis-manager/main/Screenshots/player-creation.png)
+![Player list](https://raw.githubusercontent.com/mk-forge/table-tennis-manager/main/Screenshots/player-list.png)
+![Player detail](https://raw.githubusercontent.com/mk-forge/table-tennis-manager/main/Screenshots/player-detail.png)
+![Player matches](https://raw.githubusercontent.com/mk-forge/table-tennis-manager/main/Screenshots/player-matches.png)
