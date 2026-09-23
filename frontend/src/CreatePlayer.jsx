@@ -20,17 +20,17 @@ function CreatePlayer() {
     setError(null);
 
     if (!name.trim()) {
-      setValidationError("Jméno a příjmení je povinné");
+      setValidationError("Jméno a příjmení je povinné.");
       return;
     }
     if (!handedness) {
-      setValidationError("Vyberte držení");
+      setValidationError("Vyberte držení.");
       return;
     }
 
     try {
       setSuccess(false);
-      await axios.post("http://localhost:3000/players", {
+      await axios.post(`${process.env.REACT_APP_API_URL}/players`, {
         name: name.trim(),
         handedness: handedness
       });
@@ -39,7 +39,7 @@ function CreatePlayer() {
       setHandedness("");
       setTimeout(() => navigate("/players"), 2000);
     } catch (err) {
-      setError(err.response?.data?.message || "Nepodařilo se vytvořit hráče");
+      setError(err.response?.data?.message || "Nepodařilo se vytvořit hráče.");
     }
   };
 

@@ -12,10 +12,10 @@ function PlayerList() {
     document.title = "Seznam hráčů";
     let fetchPlayers = async () => {
       try {
-        let response = await axios.get("http://localhost:3000/players");
+        let response = await axios.get(`${process.env.REACT_APP_API_URL}/players`);
         setPlayers(response.data);
       } catch (err) {
-        setError("Nepodařilo se načíst hráče");
+        setError("Nepodařilo se načíst hráče.");
       } finally {
         setLoading(false);
       }
@@ -33,7 +33,7 @@ function PlayerList() {
         Přidat hráče
       </button>
       {players.length == 0 ? (
-        <p className="info-message">Žádní hráči</p>
+        <p className="info-message">Žádní hráči.</p>
       ) : (
         <table>
           <thead>

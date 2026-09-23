@@ -19,15 +19,15 @@ function PlayerMatches() {
     let fetchData = async () => {
       try {
         let [playerRes, matchesRes, playersRes] = await Promise.all([
-          axios.get(`http://localhost:3000/players/${id}`),
-          axios.get(`http://localhost:3000/players/${id}/matches`),
-          axios.get("http://localhost:3000/players")
+          axios.get(`${process.env.REACT_APP_API_URL}/players/${id}`),
+          axios.get(`${process.env.REACT_APP_API_URL}/players/${id}/matches`),
+          axios.get(`${process.env.REACT_APP_API_URL}/players`)
         ]);
         setPlayer(playerRes.data);
         setMatches(matchesRes.data);
         setAllPlayers(playersRes.data);
       } catch (err) {
-        setError("Nepodařilo se načíst data");
+        setError("Nepodařilo se načíst data.");
       } finally {
         setLoading(false);
       }
@@ -39,15 +39,15 @@ function PlayerMatches() {
     e.preventDefault();
     setValidationError("");
     if (!newMatch.date || !newMatch.opponentId || !newMatch.score) {
-      setValidationError("Vyplňte všechna pole");
+      setValidationError("Vyplňte všechna pole.");
       return;
     }
     if (!/^\d{1,2}:\d{1,2}$/.test(newMatch.score)) {
-      setValidationError("Skóre musí být ve formátu číslo:číslo (např. 3:2)");
+      setValidationError("Skóre musí být ve formátu číslo:číslo (např. 3:2).");
       return;
     }
     try {
-      let response = await axios.post(`http://localhost:3000/players/${id}/matches`, {
+      let response = await axios.post(`${process.env.REACT_APP_API_URL}/players/${id}/matches`, {
         ...newMatch,
         opponentId: parseInt(newMatch.opponentId),
         date: new Date(newMatch.date).toISOString()
@@ -56,27 +56,27 @@ function PlayerMatches() {
       setNewMatch({ date: "", score: "", opponentId: "" });
       setError(null);
     } catch (err) {
-      setError(err.response?.data?.message || "Nepodařilo se přidat zápas");
+      setError(err.response?.data?.message || "Nepodařilo se přidat zápas.");
     }
   };
 
   let handleDeleteMatch = async (matchId) => {
     try {
-      await axios.delete(`http://localhost:3000/matches/${matchId}`);
+      await axios.delete(`${process.env.REACT_APP_API_URL}/matches/${matchId}`);
       setMatches(matches.filter(match => match.id != matchId));
     } catch (err) {
-      setError("Nepodařilo se smazat zápas");
+      setError("Nepodařilo se smazat zápas.");
     }
   };
 
   let handleUpdateMatch = async (e) => {
     e.preventDefault();
     if (!/^\d{1,2}:\d{1,2}$/.test(editingMatch.score)) {
-      setError("Skóre musí být ve formátu číslo:číslo (např. 3:2)");
+      setError("Skóre musí být ve formátu číslo:číslo (např. 3:2).");
       return;
     }
     try {
-      let response = await axios.put(`http://localhost:3000/matches/${editingMatch.id}`, {
+      let response = await axios.put(`${process.env.REACT_APP_API_URL}/matches/${editingMatch.id}`, {
         ...editingMatch,
         date: new Date(editingMatch.date).toISOString()
       });
@@ -84,7 +84,7 @@ function PlayerMatches() {
       setEditingMatch(null);
       setError(null);
     } catch (err) {
-      setError(err.response?.data?.message || "Nepodařilo se upravit zápas");
+      setError(err.response?.data?.message || "Nepodařilo se upravit zápas.");
     }
   };
 
@@ -95,7 +95,7 @@ function PlayerMatches() {
 
   if (loading) return <div className="spinner"></div>;
   if (error) return <p className="error-message">{error}</p>;
-  if (!player) return <p className="error-message">Hráč nebyl nalezen</p>;
+  if (!player) return <p className="error-message">Hráč nebyl nalezen.</p>;
 
   return (
     <div className="content-wrapper">
@@ -144,7 +144,7 @@ function PlayerMatches() {
 
       <h2>Seznam zápasů</h2>
       {matches.length == 0 ? (
-        <p className="info-message">Žádné zápasy</p>
+        <p className="info-message">Žádné zápasy.</p>
       ) : (
         <table>
           <thead>
