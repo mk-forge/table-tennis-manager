@@ -35,7 +35,7 @@ docker compose up --build
 
 ## Website
 
-[table-tennis-manager-3se.pages.dev](https://table-tennis-manager-3se.pages.dev/)
+[Table Tennis Manager](https://table-tennis-manager-3se.pages.dev/)
 
 > **Note:** The backend runs on a free tier and may take up to a minute to wake up after inactivity.
 
