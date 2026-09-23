@@ -1,5 +1,5 @@
 let express = require("express");
-let { PrismaClient } = require("@prisma/client");
+let { PrismaClient } = require("./src/generated/prisma");
 let cors = require('cors');
 
 let app = express();
@@ -13,7 +13,7 @@ app.get("/players", async (req, res) => {
     let players = await prisma.player.findMany({ include: { matches: true } });
     res.json(players);
   } catch (error) {
-    res.status(500).json({ error: "Chyba při načítání hráčů" });
+    res.status(500).json({ error: "Chyba při načítání hráčů." });
   }
 });
 
@@ -29,7 +29,7 @@ app.post("/players", async (req, res) => {
     });
     res.json(player);
   } catch (error) {
-    res.status(500).json({ error: "Chyba při vytváření hráče" });
+    res.status(500).json({ error: "Chyba při vytváření hráče." });
   }
 });
 
@@ -40,11 +40,11 @@ app.get("/players/:id", async (req, res) => {
       include: { matches: true },
     });
     if (!player) {
-      return res.status(404).json({ error: "Hráč nebyl nalezen" });
+      return res.status(404).json({ error: "Hráč nebyl nalezen." });
     }
     res.json(player);
   } catch (error) {
-    res.status(500).json({ error: "Chyba při načítání detailů hráče" });
+    res.status(500).json({ error: "Chyba při načítání detailů hráče." });
   }
 });
 
@@ -52,7 +52,7 @@ app.put("/players/:id", async (req, res) => {
   try {
     let { name, handedness } = req.body;
     if (!name || !handedness) {
-      return res.status(400).json({ error: "Jméno a držení jsou povinné" });
+      return res.status(400).json({ error: "Jméno a držení jsou povinné." });
     }
     let player = await prisma.player.update({
       where: { id: parseInt(req.params.id) },
@@ -60,16 +60,16 @@ app.put("/players/:id", async (req, res) => {
     });
     res.json(player);
   } catch (error) {
-    res.status(500).json({ error: "Chyba při úpravě hráče" });
+    res.status(500).json({ error: "Chyba při úpravě hráče." });
   }
 });
 
 app.delete("/players/:id", async (req, res) => {
   try {
     let player = await prisma.player.delete({ where: { id: parseInt(req.params.id) } });
-    res.json({ message: "Hráč byl odstraněn", player });
+    res.json({ message: "Hráč byl odstraněn.", player });
   } catch (error) {
-    res.status(500).json({ error: "Chyba při mazání hráče" });
+    res.status(500).json({ error: "Chyba při mazání hráče." });
   }
 });
 
@@ -77,7 +77,7 @@ app.post("/players/:playerId/matches", async (req, res) => {
   try {
     let { date, score, opponentId } = req.body;
     if (!date || !score || !opponentId) {
-      return res.status(400).json({ error: "Všechna pole jsou povinná" });
+      return res.status(400).json({ error: "Všechna pole jsou povinná." });
     }
     let match = await prisma.match.create({
       data: {
@@ -93,7 +93,7 @@ app.post("/players/:playerId/matches", async (req, res) => {
     res.json(match);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Chyba při přidávání zápasu" });
+    res.status(500).json({ error: "Chyba při přidávání zápasu." });
   }
 });
 
@@ -105,7 +105,7 @@ app.get("/players/:playerId/matches", async (req, res) => {
     });
     res.json(matches);
   } catch (error) {
-    res.status(500).json({ error: "Chyba při načítání zápasů" });
+    res.status(500).json({ error: "Chyba při načítání zápasů." });
   }
 });
 
@@ -113,7 +113,7 @@ app.put("/matches/:matchId", async (req, res) => {
   try {
     let { date, score, opponentId } = req.body;
     if (!/^\d{1,2}:\d{1,2}$/.test(score)) {
-      return res.status(400).json({ error: "Skóre musí být ve formátu číslo:číslo (např. 3:2)" });
+      return res.status(400).json({ error: "Skóre musí být ve formátu číslo:číslo (např. 3:2)." });
     }
     let match = await prisma.match.update({
       where: { id: parseInt(req.params.matchId) },
@@ -127,17 +127,18 @@ app.put("/matches/:matchId", async (req, res) => {
     res.json(match);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Chyba při úpravě zápasu" });
+    res.status(500).json({ error: "Chyba při úpravě zápasu." });
   }
 });
 
 app.delete("/matches/:matchId", async (req, res) => {
   try {
     let match = await prisma.match.delete({ where: { id: parseInt(req.params.matchId) } });
-    res.json({ message: "Zápas byl odstraněn", match });
+    res.json({ message: "Zápas byl odstraněn.", match });
   } catch (error) {
-    res.status(500).json({ error: "Chyba při mazání zápasu" });
+    res.status(500).json({ error: "Chyba při mazání zápasu." });
   }
 });
 
-app.listen(3000, () => console.log("Server běží na http://localhost:3000"));
+let port = process.env.PORT || 3000;
+app.listen(port, () => console.log(`Server běží na portu ${port}.`));
