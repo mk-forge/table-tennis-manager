@@ -4,7 +4,7 @@ Full-stack application for managing table tennis players and matches.
 
 ## Overview
 
-This project was developed as a school assignment. Lets you manage players, track their matches and store results in a PostgreSQL database. React frontend, Express backend, Prisma as the ORM layer.
+This project was developed as a school assignment. It lets you manage players, track their matches and store results in a PostgreSQL database. React frontend, Express backend containerized with Docker and Prisma as the ORM layer.
 
 ## Features
 
@@ -22,6 +22,10 @@ This project was developed as a school assignment. Lets you manage players, trac
 
 ## Installation
 
+1. Rename `backend/.env.example` to `backend/.env`.
+2. Create a Neon database and paste both connection strings into `backend/.env`.
+3. Run Docker Compose:
+
 ```bash
 docker compose up --build
 ```
@@ -31,7 +35,9 @@ docker compose up --build
 
 ## Website
 
-[Demo](https://table-tennis-manager.mk-forge.pages.dev/)
+[table-tennis-manager-3se.pages.dev](https://table-tennis-manager-3se.pages.dev/)
+
+> **Note:** The backend runs on a free tier and may take up to a minute to wake up after inactivity.
 
 ## Screenshots
 
