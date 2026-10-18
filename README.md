@@ -22,6 +22,8 @@ This project was developed as a school assignment. It lets you manage players, t
 
 ## Installation
 
+> **Note:** Requires [Docker Desktop](https://www.docker.com/products/docker-desktop/) to be installed and running.
+
 1. Rename `backend/.env.example` to `backend/.env`.
 2. Create a Neon database and paste both connection strings into `backend/.env`.
 3. Run Docker Compose:
