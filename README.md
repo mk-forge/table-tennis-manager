@@ -1,14 +1,14 @@
 # Table Tennis Manager
 
-![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=black)
-![Node.js](https://img.shields.io/badge/Node.js-5FA04E?logo=nodedotjs&logoColor=white)
+![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-8CC84C?logo=nodedotjs&logoColor=white)
 ![Express](https://img.shields.io/badge/Express-000000?logo=express&logoColor=white)
-![Prisma](https://img.shields.io/badge/Prisma-2D3748?logo=prisma&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)
+![Prisma](https://img.shields.io/badge/Prisma-0C344B?logo=prisma&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?logo=postgresql&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-1D63ED?logo=docker&logoColor=white)
 ![Render](https://img.shields.io/badge/Render-000000?logo=render&logoColor=white)
 ![Cloudflare](https://img.shields.io/badge/Cloudflare-F38020?logo=cloudflare&logoColor=white)
-![Neon](https://img.shields.io/badge/Neon-00E599?logo=neon&logoColor=black)
+![Neon](https://img.shields.io/badge/Neon-37C490?logo=neon&logoColor=white)
 
 Full-stack application for managing table tennis players and matches.
 
