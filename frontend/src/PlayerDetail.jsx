@@ -11,6 +11,7 @@ function PlayerDetail() {
   let [loading, setLoading] = useState(true);
   let [error, setError] = useState(null);
   let [matchError, setMatchError] = useState("");
+  let [honeypot, setHoneypot] = useState("");
 
   useEffect(() => {
     document.title = "Detail hráče";
@@ -34,6 +35,8 @@ function PlayerDetail() {
   }, [id]);
 
   let handleAddMatch = async () => {
+    if (honeypot) return;
+
     if (!newMatch.date || !newMatch.score || !newMatch.opponentId) {
       setMatchError("Vyplňte všechna pole.");
       return;
@@ -47,7 +50,8 @@ function PlayerDetail() {
       let response = await axios.post(`${process.env.REACT_APP_API_URL}/players/${id}/matches`, {
         date: newMatch.date,
         score: newMatch.score,
-        opponentId: parseInt(newMatch.opponentId)
+        opponentId: parseInt(newMatch.opponentId),
+        _gotcha: honeypot
       });
       setMatches([...matches, response.data]);
       setNewMatch({ date: "", score: "", opponentId: "" });
@@ -103,6 +107,14 @@ function PlayerDetail() {
                 style={{ width: '100%' }}
               />
             </div>
+            <input
+              type="text"
+              value={honeypot}
+              onChange={(event) => setHoneypot(event.target.value)}
+              tabIndex={-1}
+              autoComplete="off"
+              className="hidden-input"
+            />
             {matchError && <p style={{ color: '#cc0000', margin: '8px 0' }}>{matchError}</p>}
             <button onClick={handleAddMatch} style={{ marginTop: '8px' }}>Přidat zápas</button>
           </div>

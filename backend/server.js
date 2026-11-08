@@ -19,8 +19,10 @@ app.get("/players", async (req, res) => {
 
 app.post("/players", async (req, res) => {
   try {
-    let { name, handedness } = req.body;
-    
+    let { name, handedness, _gotcha } = req.body;
+
+    if (_gotcha) return res.json({ message: "OK" });
+
     let player = await prisma.player.create({
       data: {
         name,
@@ -75,7 +77,10 @@ app.delete("/players/:id", async (req, res) => {
 
 app.post("/players/:playerId/matches", async (req, res) => {
   try {
-    let { date, score, opponentId } = req.body;
+    let { date, score, opponentId, _gotcha } = req.body;
+
+    if (_gotcha) return res.json({ message: "OK" });
+
     if (!date || !score || !opponentId) {
       return res.status(400).json({ error: "Všechna pole jsou povinná." });
     }

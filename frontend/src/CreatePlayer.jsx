@@ -8,6 +8,7 @@ function CreatePlayer() {
   let [error, setError] = useState(null);
   let [success, setSuccess] = useState(false);
   let [validationError, setValidationError] = useState("");
+  let [honeypot, setHoneypot] = useState("");
   let navigate = useNavigate();
 
   useEffect(() => {
@@ -18,6 +19,14 @@ function CreatePlayer() {
     e.preventDefault();
     setValidationError("");
     setError(null);
+
+    if (honeypot) {
+      setSuccess(true);
+      setName("");
+      setHandedness("");
+      setTimeout(() => navigate("/players"), 2000);
+      return;
+    }
 
     if (!name.trim()) {
       setValidationError("Jméno a příjmení je povinné.");
@@ -32,7 +41,8 @@ function CreatePlayer() {
       setSuccess(false);
       await axios.post(`${process.env.REACT_APP_API_URL}/players`, {
         name: name.trim(),
-        handedness: handedness
+        handedness: handedness,
+        _gotcha: honeypot
       });
       setSuccess(true);
       setName("");
@@ -73,6 +83,14 @@ function CreatePlayer() {
             <option value="Pravák">Pravák</option>
           </select>
         </div>
+        <input
+          type="text"
+          value={honeypot}
+          onChange={(event) => setHoneypot(event.target.value)}
+          tabIndex={-1}
+          autoComplete="off"
+          className="hidden-input"
+        />
         <button type="submit">Vytvořit hráče</button>
       </form>
     </div>

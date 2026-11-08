@@ -13,6 +13,7 @@ function PlayerMatches() {
   let [error, setError] = useState(null);
   let [editingMatch, setEditingMatch] = useState(null);
   let [validationError, setValidationError] = useState("");
+  let [honeypot, setHoneypot] = useState("");
 
   useEffect(() => {
     document.title = "Zápasy hráče";
@@ -37,7 +38,9 @@ function PlayerMatches() {
 
   let handleAddMatch = async (e) => {
     e.preventDefault();
+    if (honeypot) return;
     setValidationError("");
+
     if (!newMatch.date || !newMatch.opponentId || !newMatch.score) {
       setValidationError("Vyplňte všechna pole.");
       return;
@@ -50,7 +53,8 @@ function PlayerMatches() {
       let response = await axios.post(`${process.env.REACT_APP_API_URL}/players/${id}/matches`, {
         ...newMatch,
         opponentId: parseInt(newMatch.opponentId),
-        date: new Date(newMatch.date).toISOString()
+        date: new Date(newMatch.date).toISOString(),
+        _gotcha: honeypot
       });
       setMatches([...matches, response.data]);
       setNewMatch({ date: "", score: "", opponentId: "" });
@@ -139,6 +143,14 @@ function PlayerMatches() {
             required
           />
         </div>
+        <input
+          type="text"
+          value={honeypot}
+          onChange={(event) => setHoneypot(event.target.value)}
+          tabIndex={-1}
+          autoComplete="off"
+          className="hidden-input"
+        />
         <button type="submit">Přidat zápas</button>
       </form>
 
