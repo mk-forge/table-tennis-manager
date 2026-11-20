@@ -8,6 +8,13 @@ let prisma = new PrismaClient();
 app.use(express.json());
 app.use(cors());
 
+app.use((req, res, next) => {
+  res.set('Cross-Origin-Opener-Policy', 'same-origin');
+  res.set('Cross-Origin-Embedder-Policy', 'require-corp');
+  res.set('Cache-Control', 'no-cache');
+  next();
+});
+
 app.get("/players", async (req, res) => {
   try {
     let players = await prisma.player.findMany({ include: { matches: true } });
